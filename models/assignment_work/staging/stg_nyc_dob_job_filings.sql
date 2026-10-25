@@ -20,6 +20,7 @@ cleaned AS (
             filing_status,
             job_type,
             postcode,
+            zip,
             borough,
             house_no,
             street_name,
@@ -51,10 +52,14 @@ cleaned AS (
         CAST(total_construction_floor_area AS FLOAT64) AS construction_floor_area_sqft,
 
         -- Location - clean zip code (raw column is called postcode)
+        -- Raw table has both postcode and zip; prefer postcode, fall back to zip
         CASE
-            WHEN UPPER(TRIM(CAST(postcode AS STRING))) IN ('N/A', 'NA', 'NONE', '') THEN NULL
-            WHEN REGEXP_CONTAINS(TRIM(CAST(postcode AS STRING)), r'^\d{5}(-?\d{4})?$')
-                THEN LEFT(TRIM(CAST(postcode AS STRING)), 5)  -- keep 5 digits to match 311
+            WHEN UPPER(TRIM(COALESCE(NULLIF(CAST(postcode AS STRING), ''), CAST(zip AS STRING))))
+                IN ('N/A', 'NA', 'NONE', '') THEN NULL
+            WHEN REGEXP_CONTAINS(
+                TRIM(COALESCE(NULLIF(CAST(postcode AS STRING), ''), CAST(zip AS STRING))),
+                r'^\d{5}(-?\d{4})?$')
+                THEN LEFT(TRIM(COALESCE(NULLIF(CAST(postcode AS STRING), ''), CAST(zip AS STRING))), 5)  -- keep 5 digits to match 311
             ELSE NULL
         END AS zip,
 
