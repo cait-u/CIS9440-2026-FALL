@@ -5,7 +5,11 @@ sources:
     database: caitu-1
     schema: nyc_homework_raw_data
     tables:
-      - name: source_nyc_dob_job_apps
+      - name: source_service_requests_homework
         description: |
           NYC 311 service requests for Dept of Transportation.
           One row per service request.
+      - name: source_nyc_dob_job_apps
+        description: |
+          NYC DOB Job applications
+          One row per application.
