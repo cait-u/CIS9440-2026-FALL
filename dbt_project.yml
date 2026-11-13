@@ -24,17 +24,17 @@ models:
    assignment_work:
      staging:
        +materialized: table
-       +schema: nyc_homework_staging
+       +schema: cis9430_project_staging
 
      marts:
        +materialized: table
-       +schema: nyc_homework_warehouse_marts
+       +schema: cis9430_project_warehouse_marts
       
        conformed:
          +materialized: table
 
-       dob_job_filings:
+       housing_litigations:
          +materialized: table
 
-       dot_311:
+       hpd_311_service_requests:
          +materialized: table
