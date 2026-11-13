@@ -1,0 +1,15 @@
+version: 2
+sources:
+  - name: raw
+    description: Raw data loaded from NYC Open Data
+    database: caitu-1
+    schema: cis9440_project_raw_data
+    tables:
+      - name: source_housing_litigations
+        description: |
+          Housing Litigations
+          One row per housing litigation case against owners of privately-owned buildings.
+      - name: source_hpd_311_service_requests	
+        description: |
+          NYC 311 service requests for HPD.
+          One row per unique NYC 311 service request routed to HPD.
