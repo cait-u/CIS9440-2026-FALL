@@ -21,7 +21,7 @@ models:
  nyc_analytics:
    +materialized: table
 
-   assignment_work:
+   project_work:
      staging:
        +materialized: table
        +schema: cis9430_project_staging
